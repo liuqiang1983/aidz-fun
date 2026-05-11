@@ -1,0 +1,139 @@
+---
+title: "Claude vs GPT-4：AI 模型深度对比评测"
+description: "从多个维度对比 Claude 和 GPT-4 的能力表现，帮助你选择最适合的工具。"
+date: "2025-04-15"
+category: "ai-models"
+tags: ["Claude", "GPT-4", "对比", "评测"]
+featured: true
+hot: true
+author: "AIDZ.FUN"
+---
+
+# Claude vs GPT-4：AI 模型深度对比评测
+
+2024 年是 AI 模型爆发的一年，Claude 3 和 GPT-4 的发布让大模型能力迈上新台阶。本文将从多个维度进行深度对比。
+
+## 快速对比
+
+| 维度 | Claude 3 | GPT-4 |
+|---|---|---|
+| 发布厂商 | Anthropic | OpenAI |
+| 最新版本 | Claude 3.5 Sonnet | GPT-4 Turbo |
+| 上下文长度 | 200K | 128K |
+| 训练数据截止 | 2024.04 | 2023.12 |
+| API 定价 | $3-15/1M tokens | $10-30/1M tokens |
+
+## 能力对比
+
+### 1. 代码能力
+
+**GPT-4 的优势：**
+- 代码补全更准确
+- 调试能力更强
+- 支持更多编程语言
+
+<PromptBlock content={`# 用 GPT-4 写一个快速排序算法
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + middle + quicksort(right)`} title="代码示例" />
+
+**Claude 的优势：**
+- 代码解释更清晰
+- 注释更详细
+- 更擅长代码审查
+
+### 2. 长文本处理
+
+Claude 在长文本处理上表现更出色：
+
+- 支持 200K 上下文
+- 长文本理解更准确
+- 总结能力更强
+
+### 3. 中文能力
+
+两者都有出色的中文能力：
+
+| 任务 | Claude 3 | GPT-4 |
+|---|---|---|
+| 中文写作 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| 中文问答 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| 中文翻译 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| 成语理解 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+
+## 场景推荐
+
+### 适合使用 Claude 的场景
+
+1. **长文档处理**：处理书籍、论文、长报告
+2. **代码审查**：审查代码质量和安全性
+3. **创意写作**：小说、剧本、诗歌
+4. **数据分析**：解释数据、生成报告
+
+### 适合使用 GPT-4 的场景
+
+1. **代码开发**：写代码、调试、重构
+2. **多模态任务**：图片理解、图表生成
+3. **API 集成**：开发者工具集成
+4. **复杂推理**：数学问题、逻辑推理
+
+## 性价比分析
+
+### API 成本对比
+
+| 模型 | 输入价格 | 输出价格 |
+|---|---|---|
+| Claude 3.5 Sonnet | $3/1M | $15/1M |
+| GPT-4 Turbo | $10/1M | $30/1M |
+
+### 建议
+
+- **日常使用**：Claude 3.5 Sonnet（性价比更高）
+- **专业开发**：GPT-4（能力更强）
+- **长文本任务**：Claude（200K 上下文）
+
+## 实际测试结果
+
+### 测试 1：代码补全
+
+**Prompt**：写一个 Python 装饰器
+
+**Claude 输出**：
+
+<CodeBlock language="python" code={`import functools
+
+def my_decorator(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        print("执行前")
+        result = func(*args, **kwargs)
+        print("执行后")
+        return result
+    return wrapper`} />
+
+### 测试 2：中文写作
+
+**Prompt**：写一篇关于 AI 的散文
+
+两个模型都能输出高质量内容，Claude 的文风更偏文艺，GPT-4 更偏理性。
+
+## 结论
+
+| 需求 | 推荐 |
+|---|---|
+| 预算有限 | Claude 3.5 Sonnet |
+| 代码为主 | GPT-4 |
+| 长文本处理 | Claude |
+| 中文为主 | 两者皆可 |
+| 多模态 | GPT-4 |
+
+## 下一步
+
+- [GPT-4 高级用法](/tutorials/ai-models/gpt-advanced)
+- [Claude 使用技巧](/tutorials/ai-models/claude-tips)
+- [AI 工具对比专题](/tutorials/use-cases/ai-tools-comparison)

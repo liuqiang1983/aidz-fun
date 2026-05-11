@@ -1,0 +1,235 @@
+---
+title: "LangChain入门教程：构建LLM应用的最佳框架"
+description: "学习使用LangChain框架快速构建LLM应用，掌握链式调用、Agent、记忆等核心概念。"
+slug: "langchain-getting-started"
+category: "tools"
+subcategory: "dev-frameworks"
+date: 2026-05-10
+author: "aidz"
+tags: ["langchain", "llm", "框架", "入门"]
+contentType: "getting-started"
+toolVersion: "LangChain 0.3"
+status: "current"
+featured: false
+order: 1
+image: "/images/langchain-getting-started.png"
+---
+
+# LangChain入门教程：构建LLM应用的最佳框架
+
+LangChain是一个强大的框架，帮助你快速构建基于大语言模型（LLM）的应用。本教程将带你从零开始掌握LangChain的核心概念。
+
+## 什么是LangChain？
+
+LangChain提供了构建LLM应用所需的核心组件：
+
+- **模型接口**：统一对接各种LLM
+- **提示模板**：管理和优化提示词
+- **链**：组合多个操作形成工作流
+- **记忆**：保持对话上下文
+- **Agent**：让LLM自主决策和执行
+
+## 安装
+
+```bash
+pip install langchain langchain-openai
+```
+
+## 第一步：基本调用
+
+```python
+from langchain_openai import ChatOpenAI
+
+# 初始化模型
+llm = ChatOpenAI(model="gpt-4o-mini")
+
+# 调用模型
+response = llm.invoke("什么是机器学习？")
+print(response.content)
+```
+
+## 第二步：使用提示模板
+
+```python
+from langchain_core.prompts import ChatPromptTemplate
+
+# 创建提示模板
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "你是一个{role}，用简洁的语言回答问题"),
+    ("user", "{input}")
+])
+
+# 创建链
+chain = prompt | llm
+
+# 调用链
+response = chain.invoke({
+    "role": "资深工程师",
+    "input": "什么是微服务？"
+})
+print(response.content)
+```
+
+## 第三步：添加输出解析
+
+```python
+from langchain_core.output_parsers import StrOutputParser
+
+# 添加输出解析器
+parser = StrOutputParser()
+
+# 完整的链
+chain = prompt | llm | parser
+
+# 调用
+result = chain.invoke({
+    "role": "技术专家",
+    "input": "解释RESTful API"
+})
+print(result)
+```
+
+## 第四步：添加记忆
+
+```python
+from langchain_core.messages import HumanMessage, AIMessage
+from langchain_community.chat_message_histories import ChatMessageHistory
+from langchain_core.runnables.history import RunnableWithMessageHistory
+
+# 创建消息历史
+history = ChatMessageHistory()
+
+# 添加历史消息
+history.add_user_message("你好，我是小明")
+history.add_ai_message("你好小明！有什么我可以帮助你的吗？")
+
+# 带记忆的链
+chain_with_history = RunnableWithMessageHistory(
+    chain,
+    get_session_history=lambda session_id: history,
+    input_messages_key="input",
+    history_messages_key="chat_history"
+)
+```
+
+## 第五步：使用Agent
+
+```python
+from langchain.agents import create_tool_calling_agent, AgentExecutor
+from langchain_core.tools import tool
+
+# 定义工具
+@tool
+def get_weather(city: str) -> str:
+    """获取城市天气信息"""
+    # 这里是模拟数据
+    weather_data = {
+        "北京": "晴天，温度25°C",
+        "上海": "多云，温度28°C"
+    }
+    return weather_data.get(city, "未找到该城市天气信息")
+
+# 创建Agent
+tools = [get_weather]
+agent = create_tool_calling_agent(llm, tools, prompt)
+agent_executor = AgentExecutor(agent=agent, tools=tools)
+
+# 执行
+result = agent_executor.invoke({
+    "input": "北京今天天气怎么样？"
+})
+print(result)
+```
+
+## 核心概念详解
+
+### Chain（链）
+
+链是LangChain的核心概念，用于组合多个组件：
+
+```python
+# 简单链
+chain = prompt | llm | parser
+
+# 分支链
+from langchain_core.runnables import RunnableBranch
+
+branch = RunnableBranch(
+    (lambda x: x["type"] == "code", code_chain),
+    (lambda x: x["type"] == "text", text_chain),
+    default_chain
+)
+```
+
+### RAG（检索增强生成）
+
+```python
+from langchain_community.vectorstores import FAISS
+from langchain_openai import OpenAIEmbeddings
+from langchain.chains import RetrievalQA
+
+# 创建向量存储
+embeddings = OpenAIEmbeddings()
+vectorstore = FAISS.from_texts(
+    ["文档内容1", "文档内容2"],
+    embeddings
+)
+
+# 创建RAG链
+qa_chain = RetrievalQA.from_chain_type(
+    llm,
+    retriever=vectorstore.as_retriever()
+)
+
+# 查询
+result = qa_chain.invoke({"query": "问题内容"})
+```
+
+## 最佳实践
+
+### 1. 使用环境变量管理API Key
+
+```python
+import os
+os.environ["OPENAI_API_KEY"] = "your-api-key"
+```
+
+### 2. 错误处理
+
+```python
+from langchain_core.runnables import RunnableConfig
+
+try:
+    result = chain.invoke(
+        {"input": "问题"},
+        config=RunnableConfig(max_concurrency=5)
+    )
+except Exception as e:
+    print(f"Error: {e}")
+```
+
+### 3. 流式输出
+
+```python
+for chunk in chain.stream({"input": "问题"}):
+    print(chunk, end="", flush=True)
+```
+
+## 常见问题
+
+### Q: LangChain支持哪些模型？
+
+支持OpenAI、Anthropic、Google、本地模型等几乎所有主流LLM。
+
+### Q: 如何调试链？
+
+使用`langchain.debug`设置或LangSmith平台进行可视化调试。
+
+### Q: 生产环境如何部署？
+
+推荐使用LangServe将链部署为API服务。
+
+## 相关文章
+
+- [LangChain Agent进阶教程](/docs/tools/dev-frameworks/langchain-agent)
+- [RAG最佳实践](/docs/tools/rag/rag-best-practices)

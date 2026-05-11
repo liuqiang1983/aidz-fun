@@ -1,0 +1,191 @@
+---
+title: "Cursor 教程：让你的代码编写效率提升 10 倍"
+description: "全面介绍 Cursor 编辑器的核心功能和使用技巧，包括 AI 补全、代码解释、多文件编辑等。"
+date: "2025-04-20"
+category: "tool-ecosystem"
+tags: ["Cursor", "AI 编程", "编辑器", "效率"]
+featured: true
+hot: false
+author: "AIDZ.FUN"
+---
+
+# Cursor 教程：让你的代码编写效率提升 10 倍
+
+Cursor 是新一代 AI 代码编辑器，基于 VS Code 开发，集成了强大的 AI 能力。本文将详细介绍 Cursor 的核心功能和使用技巧。
+
+## 为什么选择 Cursor？
+
+- 🚀 基于 VS Code，易上手
+- 🤖 内置 GPT-4 和 Claude
+- 💡 智能代码补全
+- 📝 多文件编辑支持
+- 🎯 精准的问题修复
+
+## 安装与配置
+
+### 下载安装
+
+1. 访问 [cursor.so](https://cursor.so)
+2. 下载对应系统的安装包
+3. 完成安装
+
+### 基础配置
+
+<PromptBlock content={`# 推荐 Cursor 设置
+{
+  "cursor.enableAutoComplete": true,
+  "cursor.enableCodeActions": true,
+  "cursor.defaultModel": "claude-3.5-sonnet",
+  "cursor.tabSize": 2
+}`} title="Cursor 配置" />
+
+## 核心功能详解
+
+### 1. AI 补全（Autocomplete）
+
+Cursor 的 AI 补全比传统 IDE 智能得多：
+
+- 整行甚至整函数补全
+- 根据上下文预测下一步代码
+- 支持多语言
+
+### 2. AI 聊天（Chat）
+
+按 `Cmd/Ctrl + L` 打开 AI 聊天窗口：
+
+<PromptBlock content={`# 示例 Prompt
+"帮我写一个用户登录的 API 接口，需要：
+1. 验证邮箱格式
+2. 密码加密存储
+3. JWT Token 生成
+4. 返回用户信息"`} title="AI 聊天示例" />
+
+### 3. 代码解释
+
+选中代码后按 `Cmd/Ctrl + Shift + L`：
+
+<CodeBlock language="typescript" code={`// 选中的代码
+const debounce = (fn: Function, delay: number) => {
+  let timer: NodeJS.Timeout;
+  return (...args: any[]) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+};
+
+// Cursor 会解释：
+// 这是一个防抖函数，用于限制函数调用频率
+// - fn: 要执行的函数
+// - delay: 延迟时间（毫秒）`} />
+
+### 4. 代码生成
+
+按 `Cmd/Ctrl + K` 打开内联编辑：
+
+<PromptBlock content={`# 输入需求
+"创建一个 React Hook，用于获取窗口宽度"
+
+# Cursor 生成的代码
+import { useState, useEffect } from 'react';
+
+export function useWindowWidth() {
+  const [width, setWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 0
+  );
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return width;
+}`} title="代码生成" />
+
+## 实战技巧
+
+### 技巧 1：批量重命名
+
+1. 选中要重命名的变量
+2. 按 `Cmd/Ctrl + Shift + R`
+3. 输入新名称
+4. Cursor 会自动更新所有引用
+
+### 技巧 2：代码翻译
+
+将其他语言的代码转换为目标语言：
+
+<PromptBlock content={`# 输入
+"把这段 Python 代码转换成 TypeScript"
+
+# Python 代码
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# Cursor 输出 TypeScript
+function fibonacci(n: number): number {
+    if (n <= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}`} title="代码翻译" />
+
+### 技巧 3：Bug 修复
+
+复制错误信息到 Chat 中，Cursor 会帮你分析并修复：
+
+<CodeBlock language="bash" code={`# 错误信息
+TypeError: Cannot read property 'map' of undefined`} />
+
+Cursor 分析后：
+- 指出问题原因
+- 提供修复代码
+- 解释预防措施
+
+## 快捷键汇总
+
+| 功能 | Mac | Windows |
+|---|---|---|
+| AI 聊天 | ⌘ + L | Ctrl + L |
+| 内联编辑 | ⌘ + K | Ctrl + K |
+| 代码解释 | ⌘ + ⇧ + L | Ctrl + Shift + L |
+| 接受补全 | ⌘ + → | Ctrl + → |
+
+## 订阅计划对比
+
+| 功能 | Free | Pro | Business |
+|---|---|---|---|
+| AI 补全 | ✅ | ✅ | ✅ |
+| AI 聊天 | 有限 | ✅ | ✅ |
+| 模型选择 | GPT-3.5 | GPT-4/Claude | 多模型 |
+| 价格 | $0 | $20/月 | $40/月 |
+
+## 常见问题
+
+### Q: Cursor 和 Copilot 哪个好？
+
+A: 
+- **Copilot**：更适合 VS Code 老用户，补全能力强
+- **Cursor**：更适合需要 AI 交互、代码解释的场景
+
+### Q: 如何提高 AI 响应质量？
+
+A:
+1. 描述清晰具体
+2. 提供上下文代码
+3. 分步骤提问
+4. 使用英文（效果更好）
+
+## 总结
+
+Cursor 是一个强大的 AI 代码编辑器，适合：
+
+- ✅ 想要快速编写代码的开发者
+- ✅ 需要代码解释和审查的团队
+- ✅ 学习新语言的初学者
+
+## 相关资源
+
+- [Cursor 官网](https://cursor.so)
+- [Cursor 快捷键](https://cursor.so/keybindings)
+- [LangChain 入门](/tutorials/tool-ecosystem/langchain-intro)

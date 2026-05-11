@@ -1,0 +1,173 @@
+---
+title: "GPT-4使用指南：掌握OpenAI最强大模型的技巧"
+description: "全面了解GPT-4的能力、使用技巧和最佳实践，帮助你更好地利用这一强大的AI模型。"
+slug: "gpt4-usage-guide"
+category: "ai-models"
+subcategory: "commercial"
+date: 2026-05-10
+author: "aidz"
+tags: ["gpt-4", "openai", "大模型", "使用指南"]
+contentType: "deep-dive"
+toolVersion: "GPT-4o"
+status: "current"
+featured: true
+order: 1
+image: "/images/gpt4-guide.png"
+---
+
+# GPT-4使用指南：掌握OpenAI最强大模型的技巧
+
+GPT-4是OpenAI发布的最强大语言模型，具备卓越的推理能力、多语言支持和多模态理解。本指南将帮助你充分发挥GPT-4的潜力。
+
+## GPT-4系列模型对比
+
+| 模型 | 特点 | 适用场景 |
+|------|------|---------|
+| GPT-4o | 最快、最智能 | 日常对话、复杂任务 |
+| GPT-4o-mini | 轻量、高性价比 | 简单任务、批量处理 |
+| GPT-4 Turbo | 高性能、长上下文 | 长文档处理、深度分析 |
+
+## 核心能力
+
+### 1. 文本理解与生成
+
+GPT-4能够理解复杂的文本内容，生成高质量的回复：
+
+- 长文档摘要
+- 多语言翻译
+- 创意写作
+- 代码生成
+
+### 2. 多模态理解
+
+GPT-4o支持图像输入，可以：
+
+- 分析图片内容
+- 读取图表数据
+- 识别文字信息
+
+### 3. 代码能力
+
+GPT-4在编程方面表现出色：
+
+- 代码生成与补全
+- 代码审查与优化
+- Bug调试
+- 技术文档编写
+
+## 使用技巧
+
+### 技巧1：提供清晰的上下文
+
+```
+❌ 不好的提示：
+写一个函数
+
+✅ 好的提示：
+我需要一个Python函数，用于计算两个日期之间的工作日数量。
+函数应该：
+- 排除周末
+- 支持自定义节假日列表
+- 返回整数结果
+```
+
+### 技巧2：使用角色扮演
+
+```
+你是一位资深前端工程师，有10年React开发经验。
+请帮我审查以下代码，指出潜在问题和优化建议。
+```
+
+### 技巧3：分步骤思考
+
+```
+请分步骤分析这个问题：
+1. 首先理解问题本质
+2. 列出可能的解决方案
+3. 评估每个方案的优缺点
+4. 给出最终建议
+```
+
+### 技巧4：提供示例
+
+```
+参考以下格式生成回复：
+
+示例：
+问题：什么是闭包？
+回答：闭包是指有权访问另一个函数作用域中变量的函数。
+
+现在请回答：什么是原型链？
+```
+
+## API使用示例
+
+```python
+from openai import OpenAI
+
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[
+        {"role": "system", "content": "你是一个专业的技术顾问"},
+        {"role": "user", "content": "解释什么是微服务架构"}
+    ],
+    temperature=0.7,
+    max_tokens=1000
+)
+
+print(response.choices[0].message.content)
+```
+
+## 最佳实践
+
+### 1. 控制输出格式
+
+明确指定你需要的输出格式：
+
+```
+请以Markdown表格形式输出，包含以下列：
+- 技术名称
+- 优势
+- 劣势
+- 适用场景
+```
+
+### 2. 设置温度参数
+
+- Temperature = 0：确定性输出，适合事实性任务
+- Temperature = 0.7：平衡创造性和准确性
+- Temperature = 1.0：高创造性，适合创意任务
+
+### 3. 使用系统提示
+
+系统提示可以设定AI的行为模式：
+
+```python
+messages=[
+    {"role": "system", "content": "你是一个简洁的技术专家，回答控制在200字以内"},
+    {"role": "user", "content": "解释Docker"}
+]
+```
+
+## 常见问题
+
+### Q: GPT-4和GPT-3.5有什么区别？
+
+GPT-4在推理能力、上下文长度、多模态支持方面都显著优于GPT-3.5。
+
+### Q: 如何降低API成本？
+
+- 使用GPT-4o-mini处理简单任务
+- 缓存常见问题的回复
+- 优化提示词减少token消耗
+
+### Q: 如何处理敏感信息？
+
+不要在提示中包含真实的敏感信息，使用占位符或脱敏数据。
+
+## 相关文章
+
+- [Prompt工程最佳实践](/docs/ai-models/fundamentals/prompt-engineering)
+- [Claude vs GPT-4对比](/docs/ai-models/commercial/claude-vs-gpt4)

@@ -1,0 +1,113 @@
+---
+title: "n8n入门教程：构建你的第一个自动化工作流"
+description: "学习使用n8n创建自动化工作流，连接多个应用和服务，提升工作效率。"
+slug: "n8n-getting-started"
+category: "agent-platforms"
+subcategory: "n8n"
+date: 2026-05-10
+author: "aidz"
+tags: ["n8n", "自动化", "工作流", "入门"]
+contentType: "getting-started"
+toolVersion: "n8n 1.50.0"
+status: "current"
+featured: false
+order: 1
+image: "/images/n8n-getting-started.png"
+---
+
+# n8n入门教程：构建你的第一个自动化工作流
+
+n8n是一个开源的工作流自动化工具，可以连接各种应用和服务，实现自动化任务。本教程将带你创建第一个自动化工作流。
+
+## 前置条件
+
+- 一个n8n账号（可使用云版本或自托管）
+- 基本的API概念理解
+- 约30分钟时间
+
+## 第一步：注册并登录n8n
+
+1. 访问 [n8n官网](https://n8n.io)
+2. 点击"Get started"注册账号
+3. 选择云版本或自托管版本
+4. 完成账号创建
+
+## 第二步：创建第一个工作流
+
+1. 登录后，点击"Create workflow"
+2. 你将看到空白的工作流画布
+3. 点击"+"按钮添加第一个节点
+
+## 第三步：添加触发器节点
+
+每个工作流都需要一个触发器：
+
+1. 搜索"Schedule"节点
+2. 添加并配置：
+   - Trigger interval: Days
+   - Days between triggers: 1
+   - Trigger at hour: 9
+
+这个触发器每天早上9点执行一次。
+
+## 第四步：添加HTTP请求节点
+
+1. 点击"+"添加新节点
+2. 搜索"HTTP Request"
+3. 配置请求：
+   - Method: GET
+   - URL: 输入你要请求的API地址
+
+## 第五步：添加数据处理节点
+
+1. 添加"Code"节点
+2. 编写JavaScript代码处理数据：
+
+```javascript
+// 获取上一个节点的数据
+const data = $input.all();
+
+// 处理数据
+const result = data.map(item => ({
+  title: item.json.title,
+  date: item.json.date
+}));
+
+return result;
+```
+
+## 第六步：测试工作流
+
+1. 点击"Execute workflow"按钮
+2. 查看每个节点的输出
+3. 确认数据流转正确
+
+## 第七步：激活工作流
+
+1. 点击右上角的"Active"开关
+2. 工作流将按设定的时间自动执行
+
+## 常见问题
+
+### Q: n8n和Zapier有什么区别？
+
+n8n是开源的，可以自托管，成本更低。Zapier更易用但价格较高。
+
+### Q: 支持哪些集成？
+
+n8n支持400+集成，包括Google、Slack、Notion、GitHub等主流服务。
+
+### Q: 如何处理错误？
+
+可以在节点上配置错误处理，设置重试次数或错误通知。
+
+## 下一步
+
+- 学习AI节点集成
+- 探索条件分支
+- 尝试Webhook触发
+
+## 相关文章
+
+- [n8n AI节点使用指南](/docs/agent-platforms/n8n/ai-nodes)
+- [n8n自动化实战案例](/docs/agent-platforms/n8n/automation)

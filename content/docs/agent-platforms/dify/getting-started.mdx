@@ -1,0 +1,107 @@
+---
+title: "Dify入门教程：快速搭建你的第一个AI应用"
+description: "从零开始学习Dify平台，搭建一个简单的AI问答应用，掌握Dify的核心功能和工作流程。"
+slug: "dify-getting-started"
+category: "agent-platforms"
+subcategory: "dify"
+date: 2026-05-10
+author: "aidz"
+tags: ["dify", "ai应用", "入门", "教程"]
+contentType: "getting-started"
+toolVersion: "Dify 0.15.0"
+status: "current"
+featured: true
+order: 1
+image: "/images/dify-getting-started.png"
+---
+
+# Dify入门教程：快速搭建你的第一个AI应用
+
+Dify是一个开源的LLM应用开发平台，让你无需编码就能快速构建AI应用。本教程将带你从零开始搭建一个简单的AI问答应用。
+
+## 前置条件
+
+- 一个Dify账号（可使用GitHub或Google登录）
+- 基本的AI概念理解
+- 约20分钟时间
+
+## 第一步：注册并登录Dify
+
+1. 访问 [Dify官网](https://dify.ai)
+2. 点击右上角"登录"按钮
+3. 选择GitHub或Google登录
+4. 完成账号创建
+
+## 第二步：创建新应用
+
+1. 登录后，点击"创建应用"
+2. 选择"聊天助手"类型
+3. 填写应用信息：
+   - **名称**：我的第一个AI助手
+   - **描述**：一个简单的问答助手
+
+## 第三步：配置模型
+
+1. 进入应用编辑页面
+2. 在左侧"模型"区域选择模型
+3. 推荐选择：
+   - GPT-4o-mini（性价比高）
+   - Claude 3.5 Sonnet（质量好）
+4. 配置模型参数：
+   - Temperature: 0.7
+   - Max Tokens: 2000
+
+## 第四步：编写提示词
+
+在"提示词"区域输入：
+
+```
+你是一个友好的AI助手，专门帮助用户解答问题。
+
+你的职责：
+- 准确理解用户的问题
+- 提供清晰、有帮助的回答
+- 不确定时诚实说明
+- 保持友好和专业的态度
+```
+
+## 第五步：测试应用
+
+1. 点击右侧"预览"按钮
+2. 输入测试问题
+3. 查看AI回复
+4. 根据效果调整提示词
+
+## 第六步：发布应用
+
+1. 点击右上角"发布"按钮
+2. 选择发布方式：
+   - API调用
+   - Web嵌入
+   - 公开链接
+3. 获取访问地址
+
+## 常见问题
+
+### Q: Dify是免费的吗？
+
+Dify提供免费额度，每月有一定数量的免费调用次数。超出后需要付费。
+
+### Q: 如何添加知识库？
+
+在应用编辑页面，可以添加"知识库"模块，上传文档后AI可以基于文档回答问题。
+
+### Q: 支持哪些模型？
+
+Dify支持OpenAI、Anthropic、Azure等多种模型，也可以接入本地模型。
+
+## 下一步
+
+- 学习添加知识库
+- 探索工作流功能
+- 尝试API集成
+
+## 相关文章
+
+- [Dify知识库配置指南](/docs/agent-platforms/dify/knowledge-base)
+- [Dify工作流进阶教程](/docs/agent-platforms/dify/workflow)
